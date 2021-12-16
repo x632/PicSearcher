@@ -14,7 +14,6 @@ class MainViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    val searchWord: MutableLiveData<String> = MutableLiveData()
     private var job : Job? = null
 
     private val _listOfPhoto: MutableLiveData<List<Photo>> = MutableLiveData<List<Photo>>()
