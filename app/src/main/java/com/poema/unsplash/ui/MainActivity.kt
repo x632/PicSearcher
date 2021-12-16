@@ -1,0 +1,85 @@
+package com.poema.unsplash.ui
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.widget.SearchView
+import androidx.core.text.isDigitsOnly
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.poema.unsplash.R
+import com.poema.unsplash.adapters.PhotoAdapter
+import com.poema.unsplash.data.model.Photo
+import com.poema.unsplash.databinding.ActivityMainBinding
+import com.poema.unsplash.ui.viewmodels.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
+
+
+    private lateinit var theList : MutableList<Photo>
+    private var photoAdapter: PhotoAdapter? = null
+    private val viewModel: MainViewModel by viewModels()
+    private lateinit var binding: ActivityMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        initializeRecycler()
+        viewModel.searchPhotos("sunset")
+        subscribeToListOfUrls()
+    }
+
+    private fun subscribeToListOfUrls() {
+        viewModel.listOfPhoto.observe(this, {
+            theList = it as MutableList<Photo>
+            photoAdapter?.submitList(theList)
+        })
+    }
+
+    private fun initializeRecycler() {
+        binding.recycler.apply {
+            layoutManager = LinearLayoutManager(context)
+            photoAdapter = PhotoAdapter(context)
+            adapter = photoAdapter
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+
+        val menuItem = menu.findItem(R.id.search)
+        val searchView = menuItem?.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                val searchText = newText?.lowercase(Locale.getDefault())
+                searchText?.let { text ->
+                    if (text.isNotEmpty()) {
+                        viewModel.searchPhotos(text)
+                   // viewModel.searchPhotos(text)
+                    }
+                }
+                return false
+            }
+        })
+        return super.onCreateOptionsMenu(menu)
+    }
+
+   /* override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.search -> Toast.makeText(this, "Search Clicked", Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
+    }*/
+}
