@@ -29,6 +29,7 @@ class MainViewModel @Inject constructor(
             delay(600L)
             val response = repository.searchPhotos(str)
             val list = mutableListOf<Photo>()
+            var x = 0
             for (element in response.results){
                 list.add(element.toPhoto())
             }

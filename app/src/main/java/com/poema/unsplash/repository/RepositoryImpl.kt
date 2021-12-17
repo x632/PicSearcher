@@ -14,7 +14,7 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun searchPhotos(query: String): SearchResponseDto {
         try {
-            return api.searchPhotos(AUTH, query, 5, 40)
+            return api.searchPhotos(AUTH, query, 5, 30)
 
         } catch (e: HttpException) {
             println("!!! HTTP EXCEPTION ${e.message}")

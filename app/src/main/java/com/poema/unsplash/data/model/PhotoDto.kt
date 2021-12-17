@@ -10,8 +10,16 @@ data class PhotoDto(
     val description: String?,
     @SerializedName("urls")
     val urls: UrlsDto,
+    @SerializedName("user")
+    val user: User,
+
     ){
     fun toPhoto(): Photo{
-        return Photo(id=id,description=description, url=urls.regular)
+        return if (description==null) Photo(id=id,description="by " + user.name, url=urls.regular)
+        else Photo(id=id,description=description + " by ${user.name}" , url=urls.regular)
     }
 }
+
+class User (
+    val name: String
+)
