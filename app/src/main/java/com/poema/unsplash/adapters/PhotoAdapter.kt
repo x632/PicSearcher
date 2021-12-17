@@ -3,7 +3,6 @@ package com.poema.unsplash.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.poema.unsplash.data.model.Photo
 import com.poema.unsplash.databinding.ItemDesignBinding
@@ -17,8 +16,6 @@ class PhotoAdapter (private val context: Context) :
         parent: ViewGroup,
         viewType: Int
     ): PhotoAdapter.PhotoItemViewHolder {
-
-
         val layoutInflater = LayoutInflater.from(context)
         val photoItemLayoutBinding = ItemDesignBinding.inflate(layoutInflater, parent, false)
         return PhotoItemViewHolder(photoItemLayoutBinding)

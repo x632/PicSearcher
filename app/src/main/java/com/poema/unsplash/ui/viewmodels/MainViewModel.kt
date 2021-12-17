@@ -14,14 +14,16 @@ class MainViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
+    var searchText : MutableLiveData<String> = MutableLiveData("sunset")
     private var job : Job? = null
 
-    private val _listOfPhoto: MutableLiveData<List<Photo>> = MutableLiveData<List<Photo>>()
-    val listOfPhoto = _listOfPhoto
+    val listOfPhoto: LiveData<List<Photo>> = Transformations.switchMap(searchText){
+        searchPhotos(it)
+    }
 
+    fun searchPhotos(str: String):MutableLiveData<List<Photo>> {
 
-    fun searchPhotos(str: String) {
-
+        val mutList: MutableLiveData<List<Photo>> = MutableLiveData<List<Photo>>()
         job?.cancel()
         job = viewModelScope.launch {
             delay(600L)
@@ -30,7 +32,12 @@ class MainViewModel @Inject constructor(
             for (element in response.results){
                 list.add(element.toPhoto())
             }
-            _listOfPhoto.value = list
+            mutList.value = list
         }
+        return mutList
+    }
+
+    fun setSearchText(str:String){
+        searchText.value = str
     }
 }

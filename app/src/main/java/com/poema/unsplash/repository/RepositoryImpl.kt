@@ -2,9 +2,7 @@ package com.poema.unsplash.repository
 
 import com.poema.unsplash.data.UnSplashApi
 import com.poema.unsplash.data.UnSplashApi.Companion.AUTH
-import com.poema.unsplash.data.model.Photo
-import com.poema.unsplash.data.model.PhotoDto
-import com.poema.unsplash.data.model.SearchResponse
+import com.poema.unsplash.data.model.SearchResponseDto
 import com.poema.unsplash.data.repository.Repository
 import retrofit2.HttpException
 import java.io.IOException
@@ -14,7 +12,7 @@ class RepositoryImpl @Inject constructor(
     private val api: UnSplashApi
 ) : Repository {
 
-    override suspend fun searchPhotos(query: String): SearchResponse {
+    override suspend fun searchPhotos(query: String): SearchResponseDto {
         try {
             return api.searchPhotos(AUTH, query, 5, 40)
 
@@ -24,7 +22,7 @@ class RepositoryImpl @Inject constructor(
         } catch (e: IOException) {
             println("!!! IOException ${e.message}")
         }
-        return SearchResponse(emptyList())
+        return SearchResponseDto(emptyList())
     }
 
 }

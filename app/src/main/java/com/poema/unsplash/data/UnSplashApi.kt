@@ -1,7 +1,9 @@
 package com.poema.unsplash.data
 
 
-import com.poema.unsplash.data.model.SearchResponse
+
+import com.poema.unsplash.BuildConfig
+import com.poema.unsplash.data.model.SearchResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -9,7 +11,7 @@ interface UnSplashApi {
 
     companion object {
         const val BASE_URL = "https://api.unsplash.com/"
-        const val AUTH = "yTk5ZpGoiPgLxhpBM_X6sv9Ed6oITJ4MEoYcG_EhwXQ"
+        const val AUTH = BuildConfig.UNSPLASH_KEY
     }
 
     @GET("search/photos")
@@ -18,7 +20,7 @@ interface UnSplashApi {
         @Query("query") query: String,
         @Query("page") page: Int,
         @Query("per_page") perPage: Int,
-    ): SearchResponse
+    ): SearchResponseDto
 
 }
 

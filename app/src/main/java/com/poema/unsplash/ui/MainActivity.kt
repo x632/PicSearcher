@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
@@ -21,7 +22,6 @@ import java.util.*
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-
     private lateinit var theList : MutableList<Photo>
     private var photoAdapter: PhotoAdapter? = null
     private val viewModel: MainViewModel by viewModels()
@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initializeRecycler()
-        viewModel.searchPhotos("sunset")
         subscribeToListOfUrls()
     }
 
@@ -40,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.listOfPhoto.observe(this, {
             theList = it as MutableList<Photo>
             photoAdapter?.submitList(theList)
+            binding.progressBar.visibility=View.GONE
         })
     }
 
@@ -66,8 +66,8 @@ class MainActivity : AppCompatActivity() {
                 val searchText = newText?.lowercase(Locale.getDefault())
                 searchText?.let { text ->
                     if (text.isNotEmpty()) {
-                        viewModel.searchPhotos(text)
-                   // viewModel.searchPhotos(text)
+                        viewModel.setSearchText(text)
+                        binding.progressBar.visibility=View.VISIBLE
                     }
                 }
                 return false

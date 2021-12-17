@@ -13,6 +13,7 @@ fun showIfNotNull(textView: TextView, item: String?) {
     if(item==null)
         textView.visibility = View.GONE
     else textView.visibility= View.VISIBLE
+
 }
 
 @BindingAdapter("android:glideImages")
