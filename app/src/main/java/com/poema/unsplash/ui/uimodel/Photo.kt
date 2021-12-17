@@ -1,4 +1,4 @@
-package com.poema.unsplash.data.model
+package com.poema.unsplash.ui.uimodel
 
 import android.view.View
 import android.widget.ImageView

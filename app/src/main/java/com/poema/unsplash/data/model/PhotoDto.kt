@@ -1,6 +1,7 @@
 package com.poema.unsplash.data.model
 
 import com.google.gson.annotations.SerializedName
+import com.poema.unsplash.ui.uimodel.Photo
 
 
 data class PhotoDto(
@@ -14,8 +15,8 @@ data class PhotoDto(
     val user: User,
 
     ){
-    fun toPhoto(): Photo{
-        return if (description==null) Photo(id=id,description="by " + user.name, url=urls.regular)
+    fun toPhoto(): Photo {
+        return if (description==null) Photo(id=id,description=" by ${user.name}", url=urls.regular)
         else Photo(id=id,description=description + " by ${user.name}" , url=urls.regular)
     }
 }
