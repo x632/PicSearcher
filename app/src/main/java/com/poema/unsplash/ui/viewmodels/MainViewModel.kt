@@ -1,7 +1,7 @@
 package com.poema.unsplash.ui.viewmodels
 
 import androidx.lifecycle.*
-import com.poema.unsplash.data.model.Photo
+import com.poema.unsplash.ui.uimodel.Photo
 import com.poema.unsplash.data.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job

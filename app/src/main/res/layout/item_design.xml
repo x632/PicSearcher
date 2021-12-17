@@ -8,7 +8,7 @@
 
         <variable
             name="photo"
-            type="com.poema.unsplash.data.model.Photo" />
+            type="com.poema.unsplash.ui.uimodel.Photo" />
     </data>
 
 

@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.poema.unsplash.data.model.Photo
+import com.poema.unsplash.ui.uimodel.Photo
 import com.poema.unsplash.databinding.ItemDesignBinding
 
 class PhotoAdapter (private val context: Context) :
