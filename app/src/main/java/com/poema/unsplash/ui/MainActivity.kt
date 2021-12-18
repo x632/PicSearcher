@@ -8,8 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.poema.unsplash.R
-import com.poema.unsplash.adapters.PhotoAdapter
-import com.poema.unsplash.ui.uimodel.Photo
+import com.poema.unsplash.ui.adapters.UnsplashPhotoAdapter
 import com.poema.unsplash.databinding.ActivityMainBinding
 import com.poema.unsplash.ui.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,8 +17,8 @@ import java.util.*
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var theList : MutableList<Photo>
-    private var photoAdapter: PhotoAdapter? = null
+
+    private var photoAdapter: UnsplashPhotoAdapter? = null
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
@@ -29,20 +28,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initializeRecycler()
         subscribeToListOfUrls()
+
     }
 
     private fun subscribeToListOfUrls() {
         viewModel.listOfPhoto.observe(this, {
-            theList = it as MutableList<Photo>
-            photoAdapter?.submitList(theList)
-            binding.progressBar.visibility=View.GONE
+            photoAdapter?.submitData(this.lifecycle, it)
         })
+
     }
 
     private fun initializeRecycler() {
         binding.recycler.apply {
             layoutManager = LinearLayoutManager(context)
-            photoAdapter = PhotoAdapter(context)
+            photoAdapter = UnsplashPhotoAdapter()
             adapter = photoAdapter
         }
     }
@@ -54,6 +53,10 @@ class MainActivity : AppCompatActivity() {
         val searchView = menuItem?.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query!!.isNotEmpty()) {
+                    viewModel.setSearchText(query)
+                    binding.progressBar.visibility=View.VISIBLE
+                }
                 return false
             }
 
@@ -61,10 +64,10 @@ class MainActivity : AppCompatActivity() {
 
                 val searchText = newText?.lowercase(Locale.getDefault())
                 searchText?.let { text ->
-                    if (text.isNotEmpty()) {
+                   /* if (text.isNotEmpty()) {
                         viewModel.setSearchText(text)
                         binding.progressBar.visibility=View.VISIBLE
-                    }
+                    }*/
                 }
                 return false
             }
