@@ -3,7 +3,6 @@ package com.poema.unsplash.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,7 +54,6 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query!!.isNotEmpty()) {
                     viewModel.setSearchText(query)
-                    binding.progressBar.visibility=View.VISIBLE
                 }
                 return false
             }
@@ -63,12 +61,12 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
 
                 val searchText = newText?.lowercase(Locale.getDefault())
-                searchText?.let { text ->
-                   /* if (text.isNotEmpty()) {
+              /*  searchText?.let { text ->
+                    if (text.isNotEmpty()) {
                         viewModel.setSearchText(text)
                         binding.progressBar.visibility=View.VISIBLE
-                    }*/
-                }
+                    }
+                }*/
                 return false
             }
         })
