@@ -20,7 +20,7 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var searchText: MutableLiveData<String> = MutableLiveData("sunset")
-    private var job: Job? = null
+    //private var job: Job? = null
 
     val listOfPhoto = Transformations.switchMap(searchText) {
         repository.getSearchResults(it).cachedIn(viewModelScope).asLiveData()

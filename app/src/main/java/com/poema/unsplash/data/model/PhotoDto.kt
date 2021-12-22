@@ -16,11 +16,11 @@ data class PhotoDto(
 
     ){
     fun toPhoto(): Photo {
-        return /*if (description==null)*/ Photo(id=id,description=" by ${user.name}", url=urls.regular)
+        return Photo(id=id,description=description?: "No description", url=urls.regular, bestUrl=urls.full,name = "by " + user.name)
         //else Photo(id=id,description=description + " by ${user.name}" , url=urls.regular)
     }
 }
 
 class User (
-    val name: String
+    val name: String?
 )

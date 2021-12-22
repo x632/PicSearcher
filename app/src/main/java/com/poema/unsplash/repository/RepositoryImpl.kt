@@ -12,8 +12,6 @@ import java.io.IOException
 import javax.inject.Inject
 
 
-
-
 class RepositoryImpl @Inject constructor(
     private val api: UnSplashApi
 ) : Repository {
@@ -41,5 +39,4 @@ class RepositoryImpl @Inject constructor(
         }
         return SearchResponseDto(emptyList())
     }
-
 }

@@ -16,7 +16,6 @@ class UnsplashPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Photo> {
         val position = params.key ?: UNSPLASH_STARTING_PAGE_INDEX
-        println("!!! LOADING DATA!!")
 
         return try {
             val response = unsplashApi.searchPhotos(AUTH,query, position, params.loadSize)
@@ -40,6 +39,4 @@ class UnsplashPagingSource(
     override fun getRefreshKey(state: PagingState<Int, Photo>): Int? {
         return state.anchorPosition
     }
-
-
 }
