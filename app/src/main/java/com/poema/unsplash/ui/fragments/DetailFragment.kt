@@ -39,6 +39,7 @@ class DetailFragment : Fragment() {
             .load(url)
             .into(binding.ivDetail)
 
+        if (description == "no description") binding.tvDescription.visibility = View.GONE
         binding.tvDescription.text = description
         binding.tvName.text = name
 

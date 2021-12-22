@@ -21,7 +21,6 @@ class UnsplashPhotoAdapter :
             binding.root.setOnClickListener {
                 val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.bestUrl,item.description?:"",item.name?:"")
                 Navigation.findNavController(it).navigate(action)
-                println("!!! Tryckt! $bindingAdapterPosition")
             }
             binding.photo = item
             binding.executePendingBindings()
@@ -42,8 +41,6 @@ class UnsplashPhotoAdapter :
             holder.bind(currentItem)
         }
     }
-
-
 
     companion object {
         private val PHOTO_COMPARATOR = object : DiffUtil.ItemCallback<Photo>() {
