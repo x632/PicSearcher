@@ -19,27 +19,48 @@ class MainViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
+    var validColors = listOf<String>(
+        "black_and_white",
+        "black",
+        "white",
+        "yellow",
+        "orange",
+        "red",
+        "purple",
+        "magenta",
+        "green",
+        "teal",
+        "blue"
+    )
     private var searchText: MutableLiveData<String> = MutableLiveData("sunset")
     //private var job: Job? = null
 
-    val listOfPhoto = Transformations.switchMap(searchText) {
-        repository.getSearchResults(it).cachedIn(viewModelScope).asLiveData()
+    val listOfPhoto = Transformations.switchMap(searchText) { query ->
+        val match = validColors.filter { it in query }
+        if (match.isNotEmpty()) {
+            repository.searchPhotosByColor(match[0]).cachedIn(viewModelScope).asLiveData()
+        } else {
+            repository.getSearchResults(query).cachedIn(viewModelScope).asLiveData()
+        }
+
+
     }
 
-    /*private fun getSearchResult(str: String):MutableLiveData<List<Photo>> {
-        val mutList: MutableLiveData<List<Photo>> = MutableLiveData<<List<Photo>>()
-        job?.cancel()
-        job = viewModelScope.launch {
-            delay(600L)
-            val response = repository.getSearchResults(str)
-            val list = mutableListOf<Photo>()
-            for (element in response.results.toPhoto()){
-                list.add(element.toPhoto())
-            }
-            mutList.value = list
+
+/*private fun getSearchResult(str: String):MutableLiveData<List<Photo>> {
+    val mutList: MutableLiveData<List<Photo>> = MutableLiveData<<List<Photo>>()
+    job?.cancel()
+    job = viewModelScope.launch {
+        delay(600L)
+        val response = repository.getSearchResults(str)
+        val list = mutableListOf<Photo>()
+        for (element in response.results.toPhoto()){
+            list.add(element.toPhoto())
         }
-        return mutList
-    }*/
+        mutList.value = list
+    }
+    return mutList
+}*/
 
 
     fun setSearchText(str: String) {

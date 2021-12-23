@@ -24,8 +24,22 @@ class RepositoryImpl @Inject constructor(
                 maxSize = 100,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { UnsplashPagingSource(api, query) }
+            pagingSourceFactory = { UnsplashPagingSource(api, query,null) }
         ).flow
+
+    override fun searchPhotosByColor(color: String) =
+        Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                maxSize = 100,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { UnsplashPagingSource(api, color, color) }
+        ).flow
+
+
+
+
 
     override suspend fun searchPhotos(query: String): SearchResponseDto {
         try {

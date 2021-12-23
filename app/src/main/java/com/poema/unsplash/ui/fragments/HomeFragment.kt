@@ -55,9 +55,9 @@ class HomeFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         activity?.menuInflater?.inflate(R.menu.main, menu)
-
         val menuItem = menu.findItem(R.id.search)
         val searchView = menuItem?.actionView as SearchView
+        searchView.queryHint = "Search by name or color.."
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query!!.isNotEmpty()) {

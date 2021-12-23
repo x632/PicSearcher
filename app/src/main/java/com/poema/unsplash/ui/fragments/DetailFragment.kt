@@ -51,7 +51,6 @@ class DetailFragment : Fragment() {
         if (description == "no description") binding.tvDescription.visibility = View.GONE
         binding.tvDescription.text = description
         binding.tvName.text = name
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -60,21 +59,23 @@ class DetailFragment : Fragment() {
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val idAsStr = "${item.itemId}"
-       if (idAsStr == "2131231231"){
-           val sendIntent: Intent = Intent().apply {
-               action = Intent.ACTION_SEND
-               putExtra(Intent.EXTRA_TEXT, url)
-               putExtra(EXTRA_SUBJECT, "Shared image from PhotoSearcher")
-               type = "text/plain"
-           }
-           val shareIntent = Intent.createChooser(sendIntent, null)
-           startActivity(shareIntent)
+        when (item.itemId) {
+            R.id.shareButton -> {
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, url)
+                    putExtra(EXTRA_SUBJECT, "Shared image from PhotoSearcher")
+                    type = "text/plain"
+                }
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
             }
-            else { findNavController().popBackStack() }
+            else -> {
+                findNavController().popBackStack()
+            }
+        }
         return super.onOptionsItemSelected(item)
     }
-
 
     override fun onResume() {
         super.onResume()
