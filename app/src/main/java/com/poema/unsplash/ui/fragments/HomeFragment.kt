@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.poema.unsplash.R
 import com.poema.unsplash.databinding.FragmentHomeBinding
@@ -67,7 +68,7 @@ class HomeFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
-                val searchText = newText?.lowercase(Locale.getDefault())
+                //val searchText = newText?.lowercase(Locale.getDefault())
                 /*  searchText?.let { text ->
                       if (text.isNotEmpty()) {
                           viewModel.setSearchText(text)

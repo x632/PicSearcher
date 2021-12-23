@@ -51,4 +51,6 @@ class UnsplashPhotoAdapter :
                 oldItem == newItem
         }
     }
+
+
 }
