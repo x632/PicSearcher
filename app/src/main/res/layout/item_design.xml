@@ -52,7 +52,7 @@
                 android:maxLines="1"
                 android:fixDescription="@{photo}"
                 android:textAlignment="center"
-                android:textColor="#FFFFFF"
+                android:textColor="#D5D1D0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

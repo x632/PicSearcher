@@ -82,8 +82,8 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val temp = activity as AppCompatActivity
-        temp.apply {
+        val appCompatActivity = activity as AppCompatActivity
+        appCompatActivity.apply {
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
             supportActionBar?.setDisplayShowTitleEnabled(true)
             supportActionBar?.show()

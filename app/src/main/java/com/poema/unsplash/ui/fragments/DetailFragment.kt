@@ -1,17 +1,22 @@
 package com.poema.unsplash.ui.fragments
 
 
+import android.content.Intent
+import android.content.Intent.EXTRA_SUBJECT
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.view.*
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.databinding.DataBindingUtil.setContentView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.poema.unsplash.R
 import com.poema.unsplash.databinding.FragmentDetailBinding
 
 
@@ -49,23 +54,40 @@ class DetailFragment : Fragment() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        activity?.menuInflater?.inflate(R.menu.menu_detail, menu)
+    }
+
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        findNavController().popBackStack()
+        val idAsStr = "${item.itemId}"
+       if (idAsStr == "2131231231"){
+           val sendIntent: Intent = Intent().apply {
+               action = Intent.ACTION_SEND
+               putExtra(Intent.EXTRA_TEXT, url)
+               putExtra(EXTRA_SUBJECT, "Shared image from PhotoSearcher")
+               type = "text/plain"
+           }
+           val shareIntent = Intent.createChooser(sendIntent, null)
+           startActivity(shareIntent)
+            }
+            else { findNavController().popBackStack() }
         return super.onOptionsItemSelected(item)
     }
 
+
     override fun onResume() {
         super.onResume()
-
-        val theOrientationInt = activity?.resources?.configuration?.orientation
-
-        if(theOrientationInt!! == ORIENTATION_LANDSCAPE){
-            val temp = activity as AppCompatActivity
-            temp.supportActionBar?.hide()
-        }else {
+        val theOrientation = activity?.resources?.configuration?.orientation
+        if (theOrientation!! == ORIENTATION_LANDSCAPE) {
+            // API(R) och framåt (vill inte byta än! : activity?.window?.decorView?.windowInsetsController?.hide(WindowInsets.Type.statusBars())
+            activity?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+            val appCompatActivity = activity as AppCompatActivity
+            appCompatActivity.supportActionBar?.hide()
+        } else {
             val temp = activity as AppCompatActivity
             temp.supportActionBar?.apply {
-                setDisplayShowTitleEnabled(false)
+                setDisplayShowTitleEnabled(true)
                 setDisplayHomeAsUpEnabled(true)
                 setDisplayShowTitleEnabled(true)
                 show()
