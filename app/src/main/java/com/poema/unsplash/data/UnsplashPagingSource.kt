@@ -35,6 +35,7 @@ class UnsplashPagingSource(
             )
         } catch (exception: IOException) {
             LoadResult.Error(exception)
+
         } catch (exception: HttpException) {
             LoadResult.Error(exception)
         }
