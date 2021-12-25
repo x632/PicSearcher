@@ -9,5 +9,87 @@
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 
+    <item
+        android:id="@+id/filterButton"
+        android:title="@string/filter_on_color"
+        android:icon="@drawable/filter24"
+        app:showAsAction="ifRoom">
+
+        <menu>
+            <item
+                android:id="@+id/colorIcon"
+                android:title="@string/no_filter"
+                android:icon="@drawable/nofiltericon24"
+                app:showAsAction="never">
+            </item>
+            <item
+                android:id="@+id/no_filter"
+                android:title="@string/no_filter"
+                app:showAsAction="never">
+            </item>
+            <item
+                android:id="@+id/black_white"
+                android:title="black and white"
+                app:showAsAction="never">
+            </item>
+            <item
+                android:id="@+id/black"
+                android:title="@string/black"
+                app:showAsAction="never">
+            </item>
+            <item
+                android:id="@+id/white"
+                android:title="white"
+                app:showAsAction="never">
+            </item>
+            <item
+                android:id="@+id/yellow"
+                android:title="yellow"
+                app:showAsAction="never">
+            </item>
+            <item
+                android:id="@+id/orange"
+                android:title="@string/orange">
+                app:showAsAction="never">
+            </item>
+            <item
+                android:id="@+id/red"
+                android:title="@string/red"
+                app:showAsAction="never">
+            </item>
+            <item
+                android:id="@+id/purple"
+                android:title="@string/purple"
+                app:showAsAction="never">
+            </item>
+            <item
+                android:id="@+id/magenta"
+                android:title="@string/magenta"
+                app:showAsAction="never">
+            </item>
+            <item
+                android:id="@+id/green"
+                android:title="@string/green"
+                app:showAsAction="never">
+            </item>
+            <item
+                android:id="@+id/teal"
+                android:title="@string/teal"
+                app:showAsAction="never">
+            </item>
+            <item
+                android:id="@+id/blue"
+                android:title="@string/blue"
+                app:showAsAction="never">
+            </item>
+
+
+        </menu>
+    </item>
+
+
+
+
+
 
 </menu>

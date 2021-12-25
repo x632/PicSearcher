@@ -18,14 +18,11 @@ class UnsplashPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Photo> {
         val position = params.key ?: UNSPLASH_STARTING_PAGE_INDEX
-
+        println("!!! BEEN HERE IN PAGING SOURCE")
         return try {
 
-            val response = if (color == null) {
-                unsplashApi.searchPhotos(AUTH, query, position, params.loadSize)
-            } else {
-                unsplashApi.searchPhotosByColor(AUTH, query, position, params.loadSize,color)
-            }
+            val response = unsplashApi.searchPhotos(AUTH, query, position, params.loadSize,color)
+
             val photos = mutableListOf<Photo>()
             for (element in response.results) {
                 photos.add(element.toPhoto())

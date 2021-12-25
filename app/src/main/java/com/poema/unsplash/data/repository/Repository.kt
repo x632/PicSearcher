@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface Repository {
-    suspend fun searchPhotos(query : String): SearchResponseDto
+   /* suspend fun searchPhotos(query : String): SearchResponseDto*/
 
-    fun searchPhotosByColor(color : String): Flow<PagingData<Photo>>
+ /*   fun searchPhotosByColor(query: String, color : String?): Flow<PagingData<Photo>>
+*/
 
-
-    fun getSearchResults(query: String) : Flow<PagingData<Photo>>
+    fun getSearchResults(query: String, color:String?) : Flow<PagingData<Photo>>
 }

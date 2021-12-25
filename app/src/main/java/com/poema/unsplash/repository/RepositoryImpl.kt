@@ -16,34 +16,33 @@ class RepositoryImpl @Inject constructor(
     private val api: UnSplashApi
 ) : Repository {
 
-    override fun getSearchResults(query: String) =
-
+    override fun getSearchResults(query: String, color:String?) =
         Pager(
             config = PagingConfig(
                 pageSize = 20,
                 maxSize = 100,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { UnsplashPagingSource(api, query,null) }
+            pagingSourceFactory = { UnsplashPagingSource(api, query,color) }
         ).flow
 
-    override fun searchPhotosByColor(color: String) =
+ /*   override fun searchPhotosByColor(query: String, color: String?) =
         Pager(
             config = PagingConfig(
                 pageSize = 20,
                 maxSize = 100,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { UnsplashPagingSource(api, color, color) }
-        ).flow
+            pagingSourceFactory = { UnsplashPagingSource(api, query, color) }
+        ).flow*/
 
 
 
 
 
-    override suspend fun searchPhotos(query: String): SearchResponseDto {
+   /* override suspend fun searchPhotos(query: String): SearchResponseDto {
         try {
-            return api.searchPhotos(AUTH, query, 4, 15)
+            return api.searchPhotos(AUTH, query, 4, 15,null)
 
         } catch (e: HttpException) {
             println("!!! HTTP EXCEPTION ${e.message}")
@@ -52,5 +51,5 @@ class RepositoryImpl @Inject constructor(
             println("!!! IOException ${e.message}")
         }
         return SearchResponseDto(emptyList())
-    }
+    }*/
 }

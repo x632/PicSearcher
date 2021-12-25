@@ -20,15 +20,16 @@ interface UnSplashApi {
         @Query("query") query: String,
         @Query("page") page: Int,
         @Query("per_page") perPage: Int,
+        @Query("color") color: String?,
     ): SearchResponseDto
 
-    @GET("search/photos")
+ /*   @GET("search/photos")
     suspend fun searchPhotosByColor(
         @Query("client_id") clientId: String,
         @Query("query") query: String,
         @Query("page") page: Int,
         @Query("per_page") perPage: Int,
-        @Query("color") color: String,
-    ): SearchResponseDto
+        @Query("color") color: String?,
+    ): SearchResponseDto*/
 }
 

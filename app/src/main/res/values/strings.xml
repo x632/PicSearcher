@@ -3,4 +3,18 @@
     <string name="search">search</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="share">share</string>
+    <string name="black_and_white">black_and_white</string>
+    <string name="black">black</string>
+    <string name="white">white</string>
+    <string name="yellow">yellow</string>
+    <string name="orange">orange</string>
+    <string name="red">red</string>
+    <string name="purple">purple</string>
+    <string name="magenta">magenta</string>
+    <string name="green">green</string>
+    <string name="teal">teal</string>
+    <string name="blue">blue</string>
+    <string name="filter">filter</string>
+    <string name="filter_on_color">filter On Color</string>
+    <string name="no_filter">no filter</string>
 </resources>
