@@ -4,15 +4,10 @@ package com.poema.unsplash.ui.fragments
 import android.content.Intent
 import android.content.Intent.EXTRA_SUBJECT
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.*
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide

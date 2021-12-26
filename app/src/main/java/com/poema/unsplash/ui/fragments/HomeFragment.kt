@@ -1,33 +1,20 @@
 package com.poema.unsplash.ui.fragments
 
-import android.annotation.SuppressLint
-import android.content.Intent
-import android.content.res.Resources
-import android.graphics.drawable.Drawable
+
 import android.os.Bundle
 import android.view.*
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
-import androidx.appcompat.widget.DrawableUtils
-import androidx.appcompat.widget.ListPopupWindow
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.poema.unsplash.R
 import com.poema.unsplash.databinding.FragmentHomeBinding
-import com.poema.unsplash.ui.UiEvent
+import com.poema.unsplash.other.Constants.DEFAULT_SEARCH
 import com.poema.unsplash.ui.adapters.UnsplashPhotoAdapter
 import com.poema.unsplash.ui.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.launch
+
 
 
 @AndroidEntryPoint
@@ -37,7 +24,7 @@ class HomeFragment : Fragment() {
     private var photoAdapter: UnsplashPhotoAdapter? = null
     private val viewModel: MainViewModel by viewModels()
     private var indicatorItem: MenuItem? = null
-    private var str = "sunset"
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +40,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initializeRecycler()
         subscribeToListOfUrls()
-        //subscribeToSecondList()
     }
 
     private fun subscribeToListOfUrls() {
@@ -75,27 +61,17 @@ class HomeFragment : Fragment() {
         val menuItem = menu.findItem(R.id.search)
         indicatorItem = menu.findItem(R.id.colorIcon)
         val searchView = menuItem?.actionView as SearchView
-        searchView.queryHint = "Search by name or color.."
+        searchView.queryHint = "Search.."
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query!!.isNotEmpty()) {
-                    str = query
+                    viewModel.currentSearch = query
                     viewModel.setSearchText(query)
-
                     // viewModel.onEvent(UiEvent.SearchQuery(query = query))
                 }
                 return false
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
-
-                //val searchText = newText?.lowercase(Locale.getDefault())
-                /*  searchText?.let { text ->
-                      if (text.isNotEmpty()) {
-                          viewModel.setSearchText(text)
-                          binding.progressBar.visibility=View.VISIBLE
-                      }
-                  }*/
                 return false
             }
         })
@@ -149,8 +125,11 @@ class HomeFragment : Fragment() {
             this.title = title
         }
         viewModel.setColor(title)
-        if(str!=""){
-            viewModel.setSearchText(str)
+        if(viewModel.currentSearch != ""){
+            viewModel.setSearchText(viewModel.currentSearch)
+        }else{
+            viewModel.currentSearch = DEFAULT_SEARCH
+            viewModel.setSearchText(viewModel.currentSearch)
         }
     }
 

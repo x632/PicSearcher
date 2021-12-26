@@ -3,7 +3,6 @@ package com.poema.unsplash.data
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.poema.unsplash.data.UnSplashApi.Companion.AUTH
-import com.poema.unsplash.data.model.SearchResponseDto
 import com.poema.unsplash.ui.uimodel.Photo
 import okio.IOException
 import retrofit2.HttpException
@@ -18,7 +17,6 @@ class UnsplashPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Photo> {
         val position = params.key ?: UNSPLASH_STARTING_PAGE_INDEX
-        println("!!! BEEN HERE IN PAGING SOURCE")
         return try {
 
             val response = unsplashApi.searchPhotos(AUTH, query, position, params.loadSize,color)
