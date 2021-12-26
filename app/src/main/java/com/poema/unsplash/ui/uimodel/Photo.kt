@@ -48,5 +48,7 @@ data class Photo(
     val name: String?,
     var description: String?,
     val url: String,
-    val bestUrl: String
+    val bestUrl: String,
+    val downloadLink: String,
+    val downloadHtml : String
 )

@@ -22,6 +22,7 @@ class DetailFragment : Fragment() {
     private lateinit var url: String
     private lateinit var description: String
     private lateinit var name: String
+    private lateinit var link: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +37,7 @@ class DetailFragment : Fragment() {
 
         setHasOptionsMenu(true)
         url = args.url
+        link = args.downloadLink
         description = args.description
         name = args.name
         Glide
@@ -54,11 +56,12 @@ class DetailFragment : Fragment() {
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var entireText = "$url\n\ndownloadLink: $link"
         when (item.itemId) {
             R.id.shareButton -> {
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, url)
+                    putExtra(Intent.EXTRA_TEXT, entireText)
                     putExtra(EXTRA_SUBJECT, "Shared image from PhotoSearcher")
                     type = "text/plain"
                 }
@@ -81,8 +84,8 @@ class DetailFragment : Fragment() {
             val appCompatActivity = activity as AppCompatActivity
             appCompatActivity.supportActionBar?.hide()
         } else {
-            val temp = activity as AppCompatActivity
-            temp.supportActionBar?.apply {
+            val appCompatActivity = activity as AppCompatActivity
+            appCompatActivity.supportActionBar?.apply {
                 setDisplayShowTitleEnabled(true)
                 setDisplayHomeAsUpEnabled(true)
                 setDisplayShowTitleEnabled(true)

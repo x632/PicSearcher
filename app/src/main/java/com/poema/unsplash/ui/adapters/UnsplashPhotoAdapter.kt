@@ -19,7 +19,7 @@ class UnsplashPhotoAdapter :
 
         fun bind(item: Photo) {
             binding.root.setOnClickListener {
-                val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.bestUrl,item.description?:"...",item.name?:"")
+                val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.bestUrl,item.description?:"...",item.name?:"",item.downloadHtml)
                 Navigation.findNavController(it).navigate(action)
             }
             binding.photo = item

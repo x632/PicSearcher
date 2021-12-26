@@ -15,8 +15,6 @@ import com.poema.unsplash.ui.adapters.UnsplashPhotoAdapter
 import com.poema.unsplash.ui.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
-
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 

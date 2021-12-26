@@ -41,5 +41,9 @@
             android:name="name"
             app:argType="string"
             android:defaultValue='""' />
+        <argument
+            android:name="downloadLink"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
 </navigation>

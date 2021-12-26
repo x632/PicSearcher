@@ -14,6 +14,8 @@ data class PhotoDto(
     val urls: UrlsDto,
     @SerializedName("user")
     val user: User,
+    @SerializedName("links")
+    val links: Links,
 
     ) {
     fun toPhoto(): Photo {
@@ -23,11 +25,18 @@ data class PhotoDto(
             description = description ?: "no description",
             url = urls.regular,
             bestUrl = urls.regular,
-            name = "by " + user.name
+            name = "by " + user.name,
+            downloadLink = links.download,
+            downloadHtml = links.html
         )
     }
 }
 
 class User(
     val name: String?
+)
+
+class Links(
+    val html: String,
+    val download: String
 )

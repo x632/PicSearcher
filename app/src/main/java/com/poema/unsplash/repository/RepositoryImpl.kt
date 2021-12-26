@@ -1,6 +1,5 @@
 package com.poema.unsplash.repository
 
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.poema.unsplash.data.UnSplashApi
@@ -23,32 +22,5 @@ class RepositoryImpl @Inject constructor(
             pagingSourceFactory = { UnsplashPagingSource(api, query,color) }
         ).flow
 
-/*
-    override fun searchPhotosByColor(query: String, color: String?) =
-        Pager(
-            config = PagingConfig(
-                pageSize = 20,
-                maxSize = 100,
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = { UnsplashPagingSource(api, query, color) }
-        ).flow
-*/
 
-
-
-
-
-   /* override suspend fun searchPhotos(query: String): SearchResponseDto {
-        try {
-            return api.searchPhotos(AUTH, query, 4, 15,null)
-
-        } catch (e: HttpException) {
-            println("!!! HTTP EXCEPTION ${e.message}")
-
-        } catch (e: IOException) {
-            println("!!! IOException ${e.message}")
-        }
-        return SearchResponseDto(emptyList())
-    }*/
 }
