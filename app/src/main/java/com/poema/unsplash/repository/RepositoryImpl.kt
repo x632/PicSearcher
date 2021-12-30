@@ -21,6 +21,4 @@ class RepositoryImpl @Inject constructor(
             ),
             pagingSourceFactory = { UnsplashPagingSource(api, query,color) }
         ).flow
-
-
 }

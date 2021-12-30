@@ -123,10 +123,10 @@ class HomeFragment : Fragment() {
             this.title = title
         }
         viewModel.setColor(title)
-        if(viewModel.currentSearch != ""){
+        if(viewModel.currentSearch.isEmpty()){
+            viewModel.currentSearch= DEFAULT_SEARCH
             viewModel.setSearchText(viewModel.currentSearch)
         }else{
-            viewModel.currentSearch = DEFAULT_SEARCH
             viewModel.setSearchText(viewModel.currentSearch)
         }
     }

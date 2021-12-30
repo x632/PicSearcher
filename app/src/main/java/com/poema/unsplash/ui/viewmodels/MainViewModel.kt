@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import androidx.lifecycle.Transformations.switchMap
 import androidx.paging.cachedIn
 import com.poema.unsplash.data.repository.Repository
+import com.poema.unsplash.other.Constants.DEFAULT_SEARCH
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -15,9 +16,9 @@ class MainViewModel @Inject constructor(
     /*private val _uiState = MutableStateFlow<UiState>(UiState.SearchQuery("sunset"))
     val uiState: StateFlow<UiState> = _uiState*/
 
-    private val searchText: MutableLiveData<String> = MutableLiveData<String>("sunset")
+    private val searchText: MutableLiveData<String> = MutableLiveData<String>(DEFAULT_SEARCH)
     var currentSearch = ""
-    var col: String? = null
+    private var col: String? = null
 
     val listOfPhoto = switchMap(searchText) { query ->
         repository.getSearchResults(query, col).cachedIn(viewModelScope).asLiveData()
